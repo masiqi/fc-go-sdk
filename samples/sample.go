@@ -7,7 +7,7 @@ import (
 
 	"net/http"
 
-	"github.com/aliyun/fc-go-sdk"
+	"github.com/masiqi/fc-go-sdk"
 )
 
 func main() {

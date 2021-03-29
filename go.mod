@@ -1,4 +1,4 @@
-module github.com/aliyun/fc-go-sdk
+module github.com/masiqi/fc-go-sdk
 
 go 1.15
 
