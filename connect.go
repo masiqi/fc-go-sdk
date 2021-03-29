@@ -23,9 +23,13 @@ type Connection struct {
 }
 
 // NewConnection get default connection
-func NewConnection() *Connection {
+func NewConnection(timeout uint) *Connection {
+	to := timeout
+	if to == 0 {
+		to = RequestTimeout
+	}
 	connection := &Connection{
-		Timeout: RequestTimeout,
+		Timeout: to,
 	}
 
 	resty.SetTransport(&http.Transport{

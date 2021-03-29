@@ -15,13 +15,13 @@ type Client struct {
 }
 
 // NewClient new fc client
-func NewClient(endpoint, apiVersion, accessKeyID, accessKeySecret string, opts ...ClientOption) (*Client, error) {
+func NewClient(endpoint, apiVersion, accessKeyID, accessKeySecret string, timeout uint, opts ...ClientOption) (*Client, error) {
 	config := NewConfig()
 	config.APIVersion = apiVersion
 	config.AccessKeyID = accessKeyID
 	config.AccessKeySecret = accessKeySecret
 	config.Endpoint, config.host = GetAccessPoint(endpoint)
-	connect := NewConnection()
+	connect := NewConnection(timeout)
 	client := &Client{config, connect}
 
 	for _, opt := range opts {
@@ -731,7 +731,6 @@ func (c *Client) ListFunctionAsyncInvokeConfigs(input *ListFunctionAsyncInvokeCo
 	json.Unmarshal(httpResponse.Body(), output)
 	return output, nil
 }
-
 
 // PutFunctionAsyncInvokeConfig creates or updates an async config
 func (c *Client) PutFunctionAsyncInvokeConfig(input *PutFunctionAsyncInvokeConfigInput) (*PutFunctionAsyncInvokeConfigOutput, error) {
